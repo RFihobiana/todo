@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#495563, #29303a)
+}
+.taskCountainer {
+    color: black;
+    background-color: #FFFBFE;
+    text-align: center;
+    min-width: 110%;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+.task {
+    display: flex;
+    flex-flow: column;
+    height: fit-content;
+}
+.task todo-task {
+    background-color: #FCFDFD;
+    color: black;
+    margin: 4px 8px;
+}
+#taskInput {
+    color: white;
+    background-color: #495562;
+    border-radius: 5px;
+}
+#taskInput + button {
+    border-radius: 10px;
+    border: none;
+    padding: 4px;
+}
+
+@media screen and (min-width: 380px) {
+    .taskCountainer {
+        min-width: 60vw;
+    }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <script src="./task.js" defer></script>
+    <link href="task.css" rel="stylesheet">
+</head>
+<body>
+    <div class="taskCountainer">
+        <h1>To Do List</h1>
+        <p>
+            Enter a task<br>
+            <input type="text" name="taskInput" id="taskInput" />
+            <button id="addButton" hidden>Add</button>
+        </p>
+        <div class="task"></div>
+    </div>
+    
+    <script type="text/javascript" charset="utf-8">
+        let inputTask = document.querySelector("#taskInput"),
+            addButton = document.querySelector('#addButton'),
+            taskList = document.querySelector('div.task')
+        
+        inputTask.addEventListener('input', event => {
+            addButton.removeAttribute('hidden')
+        })
+        
+        
+        let addSound = new Audio("add.mp3"),
+            removeSound = new Audio('remove.mp3'),
+            successSound = new Audio('success.wav')
+        document.addEventListener('finishedTask', event => {
+            successSound.cloneNode().play()
+        }, {capture: true})
+        
+        document.addEventListener('deleteTask', () => {
+            removeSound.cloneNode().play()}, {capture: true}
+        )
+        addButton.addEventListener('click', event => {
+            addSound.cloneNode().play()
+            let todo = document.createElement('todo-task')
+            todo.setAttribute('task', inputTask.value)
+            taskList.append(todo)
+            // Hide the button and delete input text
+            inputTask.value = ''
+            addButton.setAttribute('hidden', '')
+        })
+    </script>
+</body>
+</html>
