@@ -26,8 +26,8 @@ class Task extends HTMLElement {
             event.stopPropagation()
             if (this.disabled) return;
             let e = new CustomEvent('finishedTask', {cancelable: true})
-            this.dispatchEvent(e)
             if(!e.defaultPrevented) this.setAttribute('disabled', '')
+            this.dispatchEvent(e)
         }
     }
 
@@ -44,6 +44,7 @@ class Task extends HTMLElement {
     get size() { return this.getAttribute('size')}
     get value() { return this.getAttribute('value')}
     get hidden() { return this.hasAttribute('hidden')}
+    get task() { return this.getAttribute('task')}
     
     set disabled(value) {
         if (value) this.setAttribute('disabled', '')
@@ -55,6 +56,7 @@ class Task extends HTMLElement {
         if (value) this.setAttribute('hidden', '')
         else this.removeAttribute('hidden')
     }
+    set task(text) { this.setAttribute('task', text)}
 }
 
 Task.template.innerHTML = `
