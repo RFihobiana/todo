@@ -32,15 +32,14 @@
 
         document.addEventListener('finishedTask', event => {
             successSound.cloneNode().play()
-            localStorage.tasks = taskList.innerHTML
-            console.log(taskList.innerHTML)
+            localStorage.setItem('tasks', taskList.innerHTML)
         }, { capture: true, passive: true }, true)
 
         document.addEventListener('deleteTask', event => {
             removeSound.cloneNode().play()
             event.preventDefault()
             event.target.remove()
-            localStorage.tasks = taskList.innerHTML
+            localStorage.setItem('tasks', taskList.innerHTML)
         }, { capture: true })
 
         // Adding new task
@@ -50,7 +49,7 @@
             todo.task = inputTask.value
             todo.finished = false
             taskList.append(todo)
-            localStorage.tasks = taskList.innerHTML
+            localStorage.setItem('tasks', taskList.innerHTML)
 
             inputTask.value = ''
             inputTask.focus()
@@ -60,6 +59,10 @@
         inputTask.addEventListener('input', () => { addButton.removeAttribute('hidden') })
 
         if (localStorage.tasks) taskList.innerHTML = localStorage.tasks
+        
+        window.addEventListener('storage', event => {
+            location.reload()
+        })
     </script>
 </body>
 
